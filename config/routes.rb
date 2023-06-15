@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :todo_lists do
+    resources :list_items #, shallow: true
+  end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root to: "todo_lists#index"
 end
