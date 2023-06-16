@@ -11,22 +11,59 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="form-field-container">
+    <%= form.label "Título:", class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-textfield' %>
   </div>
 
-  <div class="field">
-    <%= form.label :color %>
-    <%= form.select :color, options_for_select([['Blue', '#5E93E3'], ['Red', '#E35E5E'], ['Green', '#5EE393']]) %>
+<div class="form-radio-container">
+  <%= form.label "Cor:", class: 'form-label' %>
+  <div class="color-options">
+    <div class="color-option-container">
+      <%= form.radio_button :color, '#5E93E3', class: 'color-option', id: 'color-option-1' %>
+      <label for="color-option-1" class="color-label-container">
+        <div class="color-label" style="background-color: #5E93E3;"></div>
+      </label>
+    </div>
+    <div class="color-option-container">
+      <%= form.radio_button :color, '#E35E5E', class: 'color-option', id: 'color-option-2' %>
+      <label for="color-option-2" class="color-label-container">
+        <div class="color-label" style="background-color: #E35E5E;"></div>
+      </label>
+    </div>
+    <div class="color-option-container">
+      <%= form.radio_button :color, '#5EE393', class: 'color-option', id: 'color-option-3' %>
+      <label for="color-option-3" class="color-label-container">
+        <div class="color-label" style="background-color: #5EE393;"></div>
+      </label>
+    </div>
+    <div class="color-option-container">
+      <%= form.radio_button :color, '#E37ACC', class: 'color-option', id: 'color-option-4' %>
+      <label for="color-option-4" class="color-label-container">
+        <div class="color-label" style="background-color: #E37ACC;"></div>
+      </label>
+    </div>
+    <div class="color-option-container">
+      <%= form.radio_button :color, '#EDCE7E', class: 'color-option', id: 'color-option-5' %>
+      <label for="color-option-5" class="color-label-container">
+        <div class="color-label" style="background-color: #EDCE7E;"></div>
+      </label>
+    </div>
+    <div class="color-option-container">
+      <%= form.radio_button :color, '#8D91F4', class: 'color-option', id: 'color-option-6' %>
+      <label for="color-option-6" class="color-label-container">
+        <div class="color-label" style="background-color: #8D91F4;"></div>
+      </label>
+    </div>
+  </div>
+</div>
+
+  <div class="form-checkbox-container">
+    <%= form.label "Finalizada:", class: 'form-label' %>
+    <%= form.check_box :done, class: 'form-checkbox' %>
   </div>
 
-  <div class="field">
-    <%= form.label :done %>
-    <%= form.check_box :done %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-actions-container">
+    <%= form.submit "Salvar", class: "button" %>
   </div>
 <% end %>
