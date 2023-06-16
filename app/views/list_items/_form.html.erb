@@ -18,12 +18,12 @@
 
   <div class="field">
     <%= form.label :priority %>
-    <%= form.select :priority, options_for_select([['High', 'alta'], ['Medium', 'média'], ['Low', 'baixa']]) %>
+    <%= form.select :priority, options_for_select([['Alta', 'high'], ['Média', 'medium'], ['Baixa', 'low']]) %>
   </div>
 
   <div class="field">
     <%= form.label :due_date %>
-    <%= form.date_field :due_date %>
+    <%= form.date_field :due_date, value: form.object.due_date.try(:strftime, '%d/%m/%Y') %>
   </div>
 
   <div class="field">

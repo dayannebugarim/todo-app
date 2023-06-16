@@ -1,33 +1,64 @@
-<h1>Todo Lists</h1>
+<header class="todo-lists-header">
+  <h1>Listas To Do</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Color</th>
-      <th>Done</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <%= link_to new_todo_list_path do %>
+    <button class="button">
+        <i class="fa fa-plus dark-icon"></i>
+        Adicionar Lista
+    </button>
+  <% end %>
+</header>
 
-  <tbody>
+<div>
+  <h2>Listas Em Andamento<h2>
+  <ul class="todo-list-ul">
     <% @todo_lists.each do |todo_list| %>
-      <tr>
-        <td><%= todo_list.title %></td>
-        <td><%= todo_list.color %></td>
-        <td><%= todo_list.done %></td>
-        <td><%= link_to 'Show', todo_list %></td>
-        <td><%= link_to 'Edit', edit_todo_list_path(todo_list) %></td>
-        <td>
-          <%= form_with url: todo_list, method: :delete do %>
-          <%= submit_tag 'Destroy', data: { confirm: 'Are you sure?' } %>
-        <% end %>
-        </td>
-      </tr>
+      <% if !todo_list.done %>
+        <li class="todo-list-li">
+            <div class='todo-list-title-container'>
+              <div class="todo-list-color" style="background: <%= todo_list.color %>;"></div>
+              <div class="todo-list-link-container"><%= link_to todo_list.title, todo_list, class: 'link todo-list-link' %></div>
+            </div>
+            <div class="todo-list-options">
+              <div><%= link_to 'Edit', edit_todo_list_path(todo_list), class: 'link' %></div>
+              <div>
+                <%= form_with url: todo_list, method: :delete do %>
+                  <button class="text-button">
+                    <i class="fa fa-solid fa-trash"></i>
+                  </button>
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
+  </ul>
+</div>
 
-<br>
+<div>
+  <h2>Listas Finalizadas<h2>
+  <ul class="todo-list-ul">
+    <% @todo_lists.each do |todo_list| %>
+      <% if todo_list.done %>
+        <li class="todo-list-li">
+            <div class='todo-list-title-container'>
+              <div class="todo-list-color" style="background: <%= todo_list.color %>;"></div>
+              <div class="todo-list-link-container"><%= link_to todo_list.title, todo_list, class: 'link todo-list-link' %></div>
+            </div>
+            <div class="todo-list-options">
+              <div><%= link_to 'Edit', edit_todo_list_path(todo_list), class: 'link' %></div>
+              <div>
+                <%= form_with url: todo_list, method: :delete do %>
+                  <button class="text-button">
+                    <i class="fa fa-solid fa-trash"></i>
+                  </button>
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
 
-<%= link_to 'New Todo List', new_todo_list_path %>
+
