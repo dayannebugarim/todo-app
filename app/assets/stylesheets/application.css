@@ -256,20 +256,36 @@ body {
 }
 
 /* FORM */
-.form-field-container {
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #1f1f1f;
+  border: 1px solid #242424;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.12);
+}
+
+.form-field-container,
+.form-radio-container {
   display: grid;
   grid-template-areas: "1fr" "1fr";
   gap: 0.3rem;
-  margin-bottom: 1rem;
 }
 
-.form-checkbox-container,
-.form-radio-container {
+.form-checkbox-container {
   display: flex;
   justify-content: start;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+}
+
+.form-date-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.3rem;
 }
 
 .form-label {
@@ -279,7 +295,8 @@ body {
   text-transform: uppercase;
 }
 
-.form-textfield {
+.form-textfield,
+.form-datefield {
   color: #fafafa;
   padding: 10px;
   border-radius: 6px;
@@ -287,6 +304,9 @@ body {
   background-color: transparent;
 }
 
+.form-datefield::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
 
 .form-actions-container {
   margin-top: 2rem;
@@ -302,11 +322,13 @@ body {
   gap: 0.5rem;
 }
 
-.color-option {
-}
-
 .color-label {
   width: 14px;
   height: 14px;
   border: 6px;
+}
+
+.priority-options {
+  display: flex;
+  gap: 2rem;
 }
