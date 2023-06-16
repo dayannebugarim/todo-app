@@ -1,8 +1,8 @@
 <header class="list-items-header">
   <div class="list-items-title-container">
     <%= link_to todo_lists_path do%>
-      <button class="button">
-          <i class="fa fa-arrow-left dark-icon"></i>
+      <button class="back-button">
+          <i class="fa fa-solid fa-angle-left fa-lg"></i>
       </button>
     <% end %> 
     <h1><%= @todo_list.title %></h1>
@@ -30,11 +30,17 @@
                   X
                 <% end %>
               </div>
-              <span><%= list_item.title %></span>
+              <span class='list-item-title'><%= list_item.title %></span>
             </div>
             <div class="list-item-details">
               <% if list_item.due_date %>
-                <span><%= list_item.due_date.strftime('%d/%m/%Y') %></span>
+                <div class="list-item-date-container">
+                  <i class="fa fa-solid fa-calendar gray-icon"></i>
+                  <span class="list-item-date"><%= list_item.due_date.strftime('%d/%m/%Y') %></span>
+                </div>
+              <% end %>
+              <% if list_item.due_date && list_item.priority %>
+                <div class="vertical-divider"></div>
               <% end %>
               <span class="<%= list_item.priority %>-priority-tag">
                 <%= priority_emoji(list_item.priority)%>
@@ -45,7 +51,7 @@
             <div>
               <%= link_to edit_todo_list_list_item_path(@todo_list, list_item) do%>
                 <button class="text-button">
-                  <i class="fa fa-solid fa-pen-to-square"></i>
+                  <i class="fa fa-solid fa-pencil"></i>
                 </button>
               <% end %>
             </div>
@@ -87,7 +93,7 @@
             <div>
               <%= link_to edit_todo_list_list_item_path(@todo_list, list_item) do%>
                 <button class="text-button">
-                  <i class="fa fa-solid fa-pen-to-square"></i>
+                  <i class="fa fa-solid fa-pencil"></i>
                 </button>
               <% end %>
             </div>
@@ -104,4 +110,3 @@
     <% end %>
   </ul>
 </div>
-

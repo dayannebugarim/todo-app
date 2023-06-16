@@ -9,8 +9,8 @@
   <% end %>
 </header>
 
-<div>
-  <h2>Listas Em Andamento<h2>
+<div class="todo-list-container">
+  <span class="todo-list-status">Em Andamento</span>
   <ul class="todo-list-ul">
     <% @todo_lists.each do |todo_list| %>
       <% if !todo_list.done %>
@@ -20,7 +20,13 @@
               <div class="todo-list-link-container"><%= link_to todo_list.title, todo_list, class: 'link todo-list-link' %></div>
             </div>
             <div class="todo-list-options">
-              <div><%= link_to 'Edit', edit_todo_list_path(todo_list), class: 'link' %></div>
+              <div>
+                <%= link_to edit_todo_list_path(todo_list) do %>
+                  <button class="text-button">
+                    <i class="fa fa-solid fa-pencil"></i>
+                  </button>
+                <% end %>
+              </div>
               <div>
                 <%= form_with url: todo_list, method: :delete do %>
                   <button class="text-button">
@@ -35,8 +41,8 @@
   </ul>
 </div>
 
-<div>
-  <h2>Listas Finalizadas<h2>
+<div class="todo-list-container">
+  <span class="todo-list-status">Finalizadas</span>
   <ul class="todo-list-ul">
     <% @todo_lists.each do |todo_list| %>
       <% if todo_list.done %>
@@ -46,7 +52,13 @@
               <div class="todo-list-link-container"><%= link_to todo_list.title, todo_list, class: 'link todo-list-link' %></div>
             </div>
             <div class="todo-list-options">
-              <div><%= link_to 'Edit', edit_todo_list_path(todo_list), class: 'link' %></div>
+              <div>
+                <%= link_to edit_todo_list_path(todo_list) do %>
+                  <button class="text-button">
+                    <i class="fa fa-solid fa-pencil"></i>
+                  </button>
+                <% end %>
+              </div>
               <div>
                 <%= form_with url: todo_list, method: :delete do %>
                   <button class="text-button">
