@@ -20,15 +20,24 @@ class ListItemsController < ApplicationController
     @list_item = @todo_list.list_items.new(list_item_params)
 
     if @list_item.save
-      redirect_to [@todo_list, @list_item], notice: 'List item was successfully created.'
+      redirect_to todo_list_list_items_path(@todo_list), notice: 'List item was successfully updated.'
     else
       render :new
     end
   end
 
   def update
+    @list_item = ListItem.find(params[:id])
     if @list_item.update(list_item_params)
-      redirect_to [@todo_list, @list_item], notice: 'List item was successfully updated.'
+      if @list_item.todo_list.list_items.all?(&:done)
+        @list_item.todo_list.update(done: true)
+      else
+        @list_item.todo_list.update(done: false)
+      end
+      respond_to do |format|
+        format.html { redirect_to todo_list_list_items_path(@todo_list), notice: 'List item was successfully updated.' }
+        format.js { head :ok }
+      end
     else
       render :edit
     end

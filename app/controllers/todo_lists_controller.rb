@@ -19,7 +19,7 @@ class TodoListsController < ApplicationController
     @todo_list = TodoList.new(todo_list_params)
 
     if @todo_list.save
-      redirect_to @todo_list, notice: 'Todo list was successfully created.'
+      redirect_to todo_lists_path, notice: 'Todo list was successfully updated.'
     else
       render :new
     end
@@ -27,7 +27,10 @@ class TodoListsController < ApplicationController
 
   def update
     if @todo_list.update(todo_list_params)
-      redirect_to @todo_list, notice: 'Todo list was successfully updated.'
+      if @todo_list.list_items.all?(&:done)
+        @todo_list.update(done: true)
+      end
+      redirect_to todo_lists_path, notice: 'Todo list was successfully updated.'
     else
       render :edit
     end
