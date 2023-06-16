@@ -69,7 +69,7 @@
             <div class='list-item-title-container'>
               <div>
                 <%= button_to [@todo_list, list_item], method: :patch, params: { list_item: { done: !list_item.done } }, remote: true, class: "unchecked-button" do%>
-                  X
+                  <i class="fa fa-solid fa-check dark-icon"></i>
                 <% end %>
               </div>
               <span class="checked-list-item-title"><%= list_item.title %></span>
