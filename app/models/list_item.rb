@@ -3,7 +3,7 @@ class ListItem < ApplicationRecord
 
   validates :title, presence: true
   validates :done, inclusion: { in: [true, false] }
-  validates :priority, allow_blank: true, inclusion: { in: ["alta", "média", "baixa"], allow_nil: true }
+  validates :priority, allow_blank: true, inclusion: { in: ["high", "medium", "low"], allow_nil: true }
 
   before_validation :set_defaults
 
