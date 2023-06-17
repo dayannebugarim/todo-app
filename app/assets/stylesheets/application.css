@@ -4,63 +4,75 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
+:root {
+  --background-color: #1a1a1a;
+  --text-color: #fafafa;
+  --card-background-color: #1f1f1f;
+  --card-border-color: #242424;
+  --card-box-shadow-color: rgba(0, 0, 0, 0.12);
+  --light-gray-color: #818181;
+  --divider-color: #333333;
+  --high-priority-tag-color: #b90000;
+  --high-priority-tag-background-color: rgba(252, 135, 135, 0.2);
+  --high-priority-tag-border-color: rgb(185, 0, 0, 0.3);
+  --medium-priority-tag-color: #c69e11;
+  --medium-priority-tag-background-color: rgba(244, 226, 130, 0.2);
+  --medium-priority-tag-border-color: rgb(198, 158, 17, 0.3);
+  --low-priority-tag-color: #1675b4;
+  --low-priority-tag-background-color: rgba(135, 201, 252, 0.2);
+  --low-priority-tag-border-color: rgb(22, 117, 180, 0.3);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   letter-spacing: 0.05rem;
-  color: #fafafa;
+  color: var(--text-color);
 }
 
 body {
   margin: auto;
   padding: 0 1rem;
   max-width: 1000px;
-  background: #1a1a1a;
-  color: #fafafa;
+  background: var(--background-color);
+  color: var(--text-color);
   font-family: "Poppins", sans-serif;
 }
 
 .dark-icon {
-  color: #1a1a1a;
+  color: var(--background-color);
 }
 
 .gray-icon {
-  color: #818181;
+  color: var(--light-gray-color);
 }
 
-.button {
-  padding: 10px 16px;
-  border-radius: 6px;
-  background-color: #fafafa;
-  color: #1a1a1a;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  letter-spacing: 0;
-}
-
-.text-button {
+.button,
+.text-button,
+.button-link {
   padding: 10px;
   border-radius: 6px;
-  background-color: transparent;
+  background-color: var(--text-color);
+  color: var(--background-color);
   border: none;
   cursor: pointer;
   font-weight: 600;
+}
+
+.text-button,
+.button-link {
+  background-color: transparent;
+}
+
+.button-link {
+  width: 100%;
 }
 
 .link {
   text-decoration: none;
   font-size: medium;
   font-weight: normal;
-}
-
-.button-link {
-  width: 100%;
-  text-decoration: none;
-  font-size: medium;
-  font-weight: normal;
-  color: #1a1a1a;
 }
 
 .todo-lists-header,
@@ -79,13 +91,13 @@ body {
 .todo-list-status {
   text-transform: uppercase;
   font-size: 14px;
-  color: #818181;
+  color: var(--light-gray-color);
 }
 
 .todo-list-ul,
 .list-item-ul {
   display: grid;
-  grid-template-areas: 1fr;
+  grid-template-areas: "1fr";
   gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -94,33 +106,22 @@ body {
   margin-top: 0.5rem;
 }
 
-.todo-list-li {
+.todo-list-li,
+.list-item-li {
   border-radius: 6px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
   padding: 12px 8px;
-  background-color: #1f1f1f;
-  border: 1px solid #242424;
-  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.12);
+  background-color: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  box-shadow: 0px 1px 6px var(--card-box-shadow-color);
 }
 
 .todo-list-li:hover {
-  background-color: #242424;
+  background-color: var(--card-border-color);
   transition: 0.2s ease-in-out;
-}
-
-.list-item-li {
-  border-radius: 6px;
-  padding: 12px 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  background-color: #1f1f1f;
-  border: 1px solid #242424;
-  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.12);
 }
 
 .todo-list-title-container,
@@ -173,14 +174,14 @@ body {
 }
 
 .list-item-date {
-  color: #818181;
+  color: var(--light-gray-color);
 }
 
 .vertical-divider {
   width: 1px;
   height: 14px;
   border-radius: 2px;
-  background: #333333;
+  background: var(--divider-color);
 }
 
 .todo-list-options,
@@ -197,7 +198,7 @@ body {
 }
 
 .checked-list-item-title {
-  color: #818181;
+  color: var(--light-gray-color);
   font-weight: 600;
   text-decoration: line-through;
 }
@@ -214,8 +215,8 @@ body {
   width: 16px;
   height: 16px;
   border-radius: 4px;
-  background-color: #fafafa;
-  border: 1px solid #242424;
+  background-color: var(--text-color);
+  border: 1px solid var(--card-border-color);
   cursor: pointer;
 }
 
@@ -229,21 +230,21 @@ body {
 }
 
 .high-priority-tag {
-  color: #b90000;
-  background-color: rgba(252, 135, 135, 0.2);
-  border: 1px solid rgb(185, 0, 0, 0.3);
+  color: var(--high-priority-tag-color);
+  background-color: var(--high-priority-tag-background-color);
+  border: 1px solid var(--high-priority-tag-border-color);
 }
 
 .medium-priority-tag {
-  color: #c69e11;
-  background-color: rgba(244, 226, 130, 0.2);
-  border: 1px solid rgb(198, 158, 17, 0.3);
+  color: var(--medium-priority-tag-color);
+  background-color: var(--medium-priority-tag-background-color);
+  border: 1px solid var(--medium-priority-tag-border-color);
 }
 
 .low-priority-tag {
-  color: #1675b4;
-  background-color: rgba(135, 201, 252, 0.2);
-  border: 1px solid rgb(22, 117, 180, 0.3);
+  color: var(--low-priority-tag-color);
+  background-color: var(--low-priority-tag-background-color);
+  border: 1px solid var(--low-priority-tag-border-color);
 }
 
 .back-button {
@@ -262,9 +263,9 @@ body {
   gap: 1.5rem;
   padding: 12px;
   border-radius: 6px;
-  background-color: #1f1f1f;
-  border: 1px solid #242424;
-  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.12);
+  background-color: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  box-shadow: 0px 1px 6px var(--card-box-shadow-color);
 }
 
 .form-field-container,
@@ -291,16 +292,16 @@ body {
 .form-label {
   padding: 0.3rem 0;
   font-size: 14px;
-  color: #818181;
+  color: var(--light-gray-color);
   text-transform: uppercase;
 }
 
 .form-textfield,
 .form-datefield {
-  color: #fafafa;
+  color: var(--text-color);
   padding: 10px;
   border-radius: 6px;
-  border: 2px solid #242424;
+  border: 2px solid var(--card-border-color);
   background-color: transparent;
 }
 
