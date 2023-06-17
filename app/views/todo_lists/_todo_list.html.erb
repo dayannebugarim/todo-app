@@ -1,17 +1,29 @@
-<div id="<%= dom_id todo_list %>">
-  <p>
-    <strong>Title:</strong>
-    <%= todo_list.title %>
-  </p>
-
-  <p>
-    <strong>Color:</strong>
-    <%= todo_list.color %>
-  </p>
-
-  <p>
-    <strong>Done:</strong>
-    <%= todo_list.done %>
-  </p>
-
+<div class="todo-list-container">
+  <span class="todo-list-status"><%= status %></span>
+  <ul class="todo-list-ul">
+    <% todo_lists.each do |todo_list| %>
+      <li class="todo-list-li">
+        <div class='todo-list-title-container'>
+          <div class="todo-list-color" style="background: <%= todo_list.color %>;"></div>
+          <div class="todo-list-link-container"><%= link_to todo_list.title, todo_list, class: 'link todo-list-link' %></div>
+        </div>
+        <div class="todo-list-options">
+          <div>
+            <%= link_to edit_todo_list_path(todo_list) do %>
+              <button class="text-button">
+                <i class="fa fa-solid fa-pencil"></i>
+              </button>
+            <% end %>
+          </div>
+          <div>
+            <%= form_with url: todo_list, method: :delete do %>
+              <button class="text-button">
+                <i class="fa fa-solid fa-trash"></i>
+              </button>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 </div>
