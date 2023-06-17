@@ -1,5 +1,12 @@
-<h1>New List Item</h1>
+<header class="form-header">
+  <div class="form-title-container">
+    <%= link_to todo_list_list_items_path(@todo_list) do%>
+      <button class="back-button">
+          <i class="fa fa-solid fa-angle-left fa-lg"></i>
+      </button>
+    <% end %> 
+    <h1>Novo Item</h1>
+  </div>
+</header>
 
 <%= render 'form', todo_list: @todo_list, list_item: @list_item %>
-
-<%= link_to 'Back', todo_list_list_items_path(@todo_list) %>

@@ -1,37 +1,50 @@
 <%= form_with(model: [todo_list, list_item]) do |form| %>
-  <% if list_item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(list_item.errors.count, "error") %> prohibited this list_item from being saved:</h2>
+<div class="form-container">
+    <% if list_item.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(list_item.errors.count, "error") %> prohibited this list_item from being saved:</h2>
 
-      <ul>
-        <% list_item.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% list_item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-field-container">
+      <%= form.label "Título:", class: 'form-label' %>
+      <%= form.text_field :title, class: 'form-textfield' %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+    <div class="form-radio-container">
+      <%= form.label "Prioridade:", class: 'form-label' %>
+      <div class="priority-options">
+        <% ['high', 'medium', 'low'].each_with_index do |priority, index| %>
+          <div class="priority-option-container">
+            <%= form.radio_button :priority, priority, class: 'priority-option', id: "priority-option-#{index + 1}" %>
+            <label for="priority-option-<%= index + 1 %>" class="priority-label-container">
+              <span class="<%= priority %>-priority-tag">
+                <%= priority_emoji(priority) %>
+              </span>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :priority %>
-    <%= form.select :priority, options_for_select([['Alta', 'high'], ['Média', 'medium'], ['Baixa', 'low']]) %>
-  </div>
+    <div class="form-date-container">
+      <%= form.label "Data de validade:", class: 'form-label' %>
+      <%= form.date_field :due_date, value: form.object.due_date.try(:strftime, '%d/%m/%Y'), class: 'form-datefield' %>
+    </div>
 
-  <div class="field">
-    <%= form.label :due_date %>
-    <%= form.date_field :due_date, value: form.object.due_date.try(:strftime, '%d/%m/%Y') %>
-  </div>
+    <div class="form-checkbox-container">
+      <%= form.label "Finalizada:", class: 'form-label' %>
+      <%= form.check_box :done, class: 'form-checkbox' %>
+    </div>
 
-  <div class="field">
-    <%= form.label :done %>
-    <%= form.check_box :done %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+    <div class="form-actions-container">
+      <%= form.submit "Salvar", class: "button" %>
+    </div>
   </div>
 <% end %>
