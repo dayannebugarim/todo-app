@@ -3,74 +3,12 @@
 
   <%= link_to new_todo_list_path do %>
     <button class="button">
-        <i class="fa fa-plus dark-icon"></i>
-        Adicionar Lista
+      <i class="fa fa-plus dark-icon"></i>
+      Adicionar Lista
     </button>
   <% end %>
 </header>
 
-<div class="todo-list-container">
-  <span class="todo-list-status">Em Andamento</span>
-  <ul class="todo-list-ul">
-    <% @todo_lists.each do |todo_list| %>
-      <% if !todo_list.done %>
-        <li class="todo-list-li">
-            <div class='todo-list-title-container'>
-              <div class="todo-list-color" style="background: <%= todo_list.color %>;"></div>
-              <div class="todo-list-link-container"><%= link_to todo_list.title, todo_list, class: 'link todo-list-link' %></div>
-            </div>
-            <div class="todo-list-options">
-              <div>
-                <%= link_to edit_todo_list_path(todo_list) do %>
-                  <button class="text-button">
-                    <i class="fa fa-solid fa-pencil"></i>
-                  </button>
-                <% end %>
-              </div>
-              <div>
-                <%= form_with url: todo_list, method: :delete do %>
-                  <button class="text-button">
-                    <i class="fa fa-solid fa-trash"></i>
-                  </button>
-              </div>
-            </div>
-          <% end %>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
-</div>
+<%= render 'todo_list', status: 'Em Andamento', todo_lists: @todo_lists.reject(&:done) %>
 
-<div class="todo-list-container">
-  <span class="todo-list-status">Finalizadas</span>
-  <ul class="todo-list-ul">
-    <% @todo_lists.each do |todo_list| %>
-      <% if todo_list.done %>
-        <li class="todo-list-li">
-            <div class='todo-list-title-container'>
-              <div class="todo-list-color" style="background: <%= todo_list.color %>;"></div>
-              <div class="todo-list-link-container"><%= link_to todo_list.title, todo_list, class: 'link todo-list-link' %></div>
-            </div>
-            <div class="todo-list-options">
-              <div>
-                <%= link_to edit_todo_list_path(todo_list) do %>
-                  <button class="text-button">
-                    <i class="fa fa-solid fa-pencil"></i>
-                  </button>
-                <% end %>
-              </div>
-              <div>
-                <%= form_with url: todo_list, method: :delete do %>
-                  <button class="text-button">
-                    <i class="fa fa-solid fa-trash"></i>
-                  </button>
-              </div>
-            </div>
-          <% end %>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
-</div>
-
-
+<%= render 'todo_list', status: 'Finalizadas', todo_lists: @todo_lists.select(&:done) %>
