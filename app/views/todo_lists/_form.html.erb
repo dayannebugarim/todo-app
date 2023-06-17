@@ -1,69 +1,33 @@
 <%= form_with(model: todo_list) do |form| %>
-  <% if todo_list.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(todo_list.errors.count, "error") %> prohibited this todo_list from being saved:</h2>
+  <div class="form-container">
+    <%= render_errors(todo_list) %>
 
-      <ul>
-        <% todo_list.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+    <div class="form-field-container">
+      <%= form.label "Título:", class: 'form-label' %>
+      <%= form.text_field :title, class: 'form-textfield' %>
+    </div>
+
+    <div class="form-radio-container">
+      <%= form.label "Cor:", class: 'form-label' %>
+      <div class="color-options">
+        <% ['#5E93E3', '#E35E5E', '#5EE393', '#E37ACC', '#EDCE7E', '#8D91F4'].each_with_index do |color, index| %>
+          <div class="color-option-container">
+            <%= form.radio_button :color, color, class: 'color-option', id: "color-option-#{index + 1}" %>
+            <label for="color-option-#{index + 1}" class="color-label-container">
+              <div class="color-label" style="background-color: <%= color %>;"></div>
+            </label>
+          </div>
         <% end %>
-      </ul>
+      </div>
     </div>
-  <% end %>
 
-  <div class="form-field-container">
-    <%= form.label "Título:", class: 'form-label' %>
-    <%= form.text_field :title, class: 'form-textfield' %>
-  </div>
+    <div class="form-checkbox-container">
+      <%= form.label "Finalizada:", class: 'form-label' %>
+      <%= form.check_box :done, class: 'form-checkbox' %>
+    </div>
 
-<div class="form-radio-container">
-  <%= form.label "Cor:", class: 'form-label' %>
-  <div class="color-options">
-    <div class="color-option-container">
-      <%= form.radio_button :color, '#5E93E3', class: 'color-option', id: 'color-option-1' %>
-      <label for="color-option-1" class="color-label-container">
-        <div class="color-label" style="background-color: #5E93E3;"></div>
-      </label>
+    <div class="form-actions-container">
+      <%= form.submit "Salvar", class: "button" %>
     </div>
-    <div class="color-option-container">
-      <%= form.radio_button :color, '#E35E5E', class: 'color-option', id: 'color-option-2' %>
-      <label for="color-option-2" class="color-label-container">
-        <div class="color-label" style="background-color: #E35E5E;"></div>
-      </label>
-    </div>
-    <div class="color-option-container">
-      <%= form.radio_button :color, '#5EE393', class: 'color-option', id: 'color-option-3' %>
-      <label for="color-option-3" class="color-label-container">
-        <div class="color-label" style="background-color: #5EE393;"></div>
-      </label>
-    </div>
-    <div class="color-option-container">
-      <%= form.radio_button :color, '#E37ACC', class: 'color-option', id: 'color-option-4' %>
-      <label for="color-option-4" class="color-label-container">
-        <div class="color-label" style="background-color: #E37ACC;"></div>
-      </label>
-    </div>
-    <div class="color-option-container">
-      <%= form.radio_button :color, '#EDCE7E', class: 'color-option', id: 'color-option-5' %>
-      <label for="color-option-5" class="color-label-container">
-        <div class="color-label" style="background-color: #EDCE7E;"></div>
-      </label>
-    </div>
-    <div class="color-option-container">
-      <%= form.radio_button :color, '#8D91F4', class: 'color-option', id: 'color-option-6' %>
-      <label for="color-option-6" class="color-label-container">
-        <div class="color-label" style="background-color: #8D91F4;"></div>
-      </label>
-    </div>
-  </div>
-</div>
-
-  <div class="form-checkbox-container">
-    <%= form.label "Finalizada:", class: 'form-label' %>
-    <%= form.check_box :done, class: 'form-checkbox' %>
-  </div>
-
-  <div class="form-actions-container">
-    <%= form.submit "Salvar", class: "button" %>
   </div>
 <% end %>

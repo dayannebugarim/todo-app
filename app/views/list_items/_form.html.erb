@@ -1,6 +1,16 @@
 <%= form_with(model: [todo_list, list_item]) do |form| %>
-  <div class="form-container">
-    <%= render_errors(list_item) %>
+<div class="form-container">
+    <% if list_item.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(list_item.errors.count, "error") %> prohibited this list_item from being saved:</h2>
+
+        <ul>
+          <% list_item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
     <div class="form-field-container">
       <%= form.label "Título:", class: 'form-label' %>
@@ -13,9 +23,9 @@
         <% ['high', 'medium', 'low'].each_with_index do |priority, index| %>
           <div class="priority-option-container">
             <%= form.radio_button :priority, priority, class: 'priority-option', id: "priority-option-#{index + 1}" %>
-            <label for="priority-option-#{index + 1}" class="priority-label-container">
-              <span class="#{priority}-priority-tag">
-                <%= priority_emoji(priority)%>
+            <label for="priority-option-<%= index + 1 %>" class="priority-label-container">
+              <span class="<%= priority %>-priority-tag">
+                <%= priority_emoji(priority) %>
               </span>
             </label>
           </div>
