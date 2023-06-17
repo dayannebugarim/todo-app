@@ -20,93 +20,12 @@
 
 <div>
   <ul class="list-item-ul">
-    <% @todo_list.list_items.each do |list_item| %>
-      <% if !list_item.done %>
-        <li class="list-item-li">
-          <div class="list-item-info-container">
-            <div class='list-item-title-container'>
-              <div>
-                <%= button_to [@todo_list, list_item], method: :patch, params: { list_item: { done: !list_item.done } }, remote: true, class: "unchecked-button" do%>
-                  X
-                <% end %>
-              </div>
-              <span class='list-item-title'><%= list_item.title %></span>
-            </div>
-            <div class="list-item-details">
-              <% if list_item.due_date %>
-                <div class="list-item-date-container">
-                  <i class="fa fa-solid fa-calendar gray-icon"></i>
-                  <span class="list-item-date"><%= list_item.due_date.strftime('%d/%m/%Y') %></span>
-                </div>
-              <% end %>
-              <% if list_item.due_date && list_item.priority %>
-                <div class="vertical-divider"></div>
-              <% end %>
-              <span class="<%= list_item.priority %>-priority-tag">
-                <%= priority_emoji(list_item.priority)%>
-              </span>
-            </div>
-          </div>
-          <div class="list-item-options">
-            <div>
-              <%= link_to edit_todo_list_list_item_path(@todo_list, list_item) do%>
-                <button class="text-button">
-                  <i class="fa fa-solid fa-pencil"></i>
-                </button>
-              <% end %>
-            </div>
-            <div>
-              <%= form_with url: [@todo_list, list_item], method: :delete do %>
-                <button class="text-button">
-                  <i class="fa fa-solid fa-trash"></i>
-                </button>
-              <% end %>
-            </div>
-          </div>
-        </li>
-      <% end %>
+    <% @todo_list.list_items.reject(&:done).each do |list_item| %>
+      <%= render 'list_item', list_item: list_item %>
     <% end %>
-  </ul>
-  <ul class="list-item-ul">
-    <% @todo_list.list_items.each do |list_item| %>
-      <% if list_item.done %>
-        <li class="list-item-li">
-          <div class="list-item-info-container">
-            <div class='list-item-title-container'>
-              <div>
-                <%= button_to [@todo_list, list_item], method: :patch, params: { list_item: { done: !list_item.done } }, remote: true, class: "unchecked-button" do%>
-                  <i class="fa fa-solid fa-check dark-icon"></i>
-                <% end %>
-              </div>
-              <span class="checked-list-item-title"><%= list_item.title %></span>
-            </div>
-            <div class="list-item-details">
-              <% if list_item.due_date %>
-                <span><%= list_item.due_date.strftime('%d/%m/%Y') %></span>
-              <% end %>
-              <span class="<%= list_item.priority %>-priority-tag">
-                <%= priority_emoji(list_item.priority)%>
-              </span>
-            </div>
-          </div>
-          <div class="list-item-options">
-            <div>
-              <%= link_to edit_todo_list_list_item_path(@todo_list, list_item) do%>
-                <button class="text-button">
-                  <i class="fa fa-solid fa-pencil"></i>
-                </button>
-              <% end %>
-            </div>
-            <div>
-              <%= form_with url: [@todo_list, list_item], method: :delete do %>
-                <button class="text-button">
-                  <i class="fa fa-solid fa-trash"></i>
-                </button>
-              <% end %>
-            </div>
-          </div>
-        </li>
-      <% end %>
+
+    <% @todo_list.list_items.select(&:done).each do |list_item| %>
+      <%= render 'list_item', list_item: list_item %>
     <% end %>
-  </ul>
-</div>
+  </ul>  
+</div>  
